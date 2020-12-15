@@ -1,44 +1,51 @@
 import React, { useState } from 'react';
-import Accordion from './components/Accordion';
-import Search from './components/Search';
-import Dropdown from './components/Dropdown';
-import Translate from './components/Translate';
-
-const items = [
-  {
-    title: 'What is React?',
-    content: 'React is a front end javascript framework',
-  },
-  {
-    title: 'Why use React?',
-    content: 'React is a favorite JS library among engineers',
-  },
-  {
-    title: 'How do you use React?',
-    content: 'You use React by creating components',
-  },
-];
+import Dropdown from './Dropdown';
+import Convert from './Convert';
 
 const options = [
   {
-    label: 'The Color Red',
-    value: 'red',
+    label: 'Afrikaans',
+    value: 'af',
   },
   {
-    label: 'The Color Green',
-    value: 'green',
+    label: 'Arabic',
+    value: 'ar',
   },
   {
-    label: 'A Shade of Blue',
-    value: 'blue',
+    label: 'Hindi',
+    value: 'hi',
+  },
+  {
+    label: 'Dutch',
+    value: 'nl',
   },
 ];
 
-export default () => {
+const Translate = () => {
+  const [language, setLanguage] = useState(options[0]);
+  const [text, setText] = useState('');
+
   return (
     <div>
-      <Translate />
+      <div className="ui form">
+        <div className="field">
+          <label>Enter Text</label>
+          <input value={text} onChange={(e) => setText(e.target.value)} />
+        </div>
+      </div>
+      <Dropdown
+        label="Select a Language"
+        selected={language}
+        onSelectedChange={setLanguage}
+        options={options}
+      />
+      <hr />
+      <h3 className="ui header">Output</h3>
+      <Convert text={text} language={language} />
     </div>
   );
 };
+
+export default Translate;
+
 
